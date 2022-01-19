@@ -5,27 +5,54 @@
 //  Created by Kuat Bodikov on 15.01.2022.
 //
 
-import UIKit
+import Foundation
+import Alamofire
 
-class NetworkingManager {
-    static var shared = NetworkingManager()
+enum Link: String {
+    case mainUrl = "https://my.api.mockaroo.com/fio.json?key=b2b55890"
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case noData
+    case decodingError
+}
+
+
+class NetworkManager {
+    static var shared = NetworkManager()
     private init() {}
     
-    func fetchImage(url: String, complition: @escaping(_ image: UIImage) -> Void) {
-        guard let url = URL(string: url) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
+    
+    //    MARK: - Alamofire
+    
+    func fetchData(_ url: String, completion: @escaping(Result<[Person], NetworkError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let persons = Person.getPersons(from: value)
+                    completion(.success(persons))
+                case .failure:
+                    completion(.failure(.decodingError))
+                }
             }
-            guard let image = UIImage(data: data) else { return }
-            
-            DispatchQueue.main.async {
-                complition(image)
-            }
-
-        }.resume()
     }
-
+    
+    func getImage(from url: String, completion: @escaping(Result<Data, NetworkError>) -> Void) {
+        AF.download(url)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                    
+                case .success(let value):
+                    completion(.success(value))
+                case .failure(_):
+                    completion(.failure(.decodingError))
+                }
+            }
+    }
 }
+
+

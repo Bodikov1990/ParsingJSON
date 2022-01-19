@@ -9,12 +9,11 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    private var urlAddress = "https://my.api.mockaroo.com/fio.json?key=b2b55890"
-    private var persons: [Person] = []
+    var persons: [Person] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getURL()
+        fetchDataWithAlomafire(Link.mainUrl.rawValue)
         tableView.rowHeight = 50
     }
     
@@ -30,15 +29,7 @@ class MainTableViewController: UITableViewController {
         let person = persons[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = person.fullName
-        DispatchQueue.global().async {
-            guard let url = URL(string: person.image ?? "") else { return }
-            guard let imageData = try? Data(contentsOf: url) else { return }
-            
-            DispatchQueue.main.async {
-                content.image = UIImage(data: imageData)
-                content.imageProperties.cornerRadius = tableView.rowHeight / 2
-            }
-        }
+        
         
         cell.contentConfiguration = content
         return cell
@@ -55,25 +46,19 @@ class MainTableViewController: UITableViewController {
         detailsVC.person = persons[indexPath.row]
     }
 
-    private func getURL() {
-        guard let url = URL(string: urlAddress) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
+
+}
+
+extension MainTableViewController {
+    func fetchDataWithAlomafire(_ url: String) {
+        NetworkManager.shared.fetchData(url) { result in
+            switch result {
+            case .success( let persons):
+                self.persons = persons
+                self.tableView.reloadData()
+            case .failure( let error):
+                print(error)
             }
-            
-            do {
-                self.persons = try JSONDecoder().decode([Person].self, from: data)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-        }.resume()
-        
+        }
     }
 }
