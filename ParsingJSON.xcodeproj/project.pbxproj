@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		125CC436279898BF006AA582 /* PersonsTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125CC435279898BF006AA582 /* PersonsTBCell.swift */; };
 		12719AA027931CD100240DDB /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12719A9F27931CD100240DDB /* DetailsViewController.swift */; };
 		12719AA52793213D00240DDB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12719AA42793213D00240DDB /* NetworkManager.swift */; };
 		1292652F27917D9500B95A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1292652E27917D9500B95A51 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		0CE45EE9D659F4780869C6EC /* Pods-ParsingJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParsingJSON.debug.xcconfig"; path = "Target Support Files/Pods-ParsingJSON/Pods-ParsingJSON.debug.xcconfig"; sourceTree = "<group>"; };
+		125CC435279898BF006AA582 /* PersonsTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsTBCell.swift; sourceTree = "<group>"; };
 		12719A9F27931CD100240DDB /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		12719AA42793213D00240DDB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1292652B27917D9500B95A51 /* ParsingJSON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParsingJSON.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +58,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		125CC43427989878006AA582 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				125CC435279898BF006AA582 /* PersonsTBCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		12719AA1279320F400240DDB /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 				12719AA1279320F400240DDB /* Services */,
 				1292654627917DEB00B95A51 /* Models */,
 				1292654427917DD100B95A51 /* Controllers */,
+				125CC43427989878006AA582 /* Views */,
 				1292654227917DAF00B95A51 /* Storyboards */,
 				1292654327917DC300B95A51 /* SupportFiles */,
 				1292654527917DD900B95A51 /* Resources */,
@@ -145,7 +156,6 @@
 				0CE45EE9D659F4780869C6EC /* Pods-ParsingJSON.debug.xcconfig */,
 				6949C167AC5B23FA7EAA99E9 /* Pods-ParsingJSON.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -268,6 +278,7 @@
 				1292652F27917D9500B95A51 /* AppDelegate.swift in Sources */,
 				12719AA52793213D00240DDB /* NetworkManager.swift in Sources */,
 				129265482791818500B95A51 /* Person.swift in Sources */,
+				125CC436279898BF006AA582 /* PersonsTBCell.swift in Sources */,
 				1292653127917D9500B95A51 /* SceneDelegate.swift in Sources */,
 				12719AA027931CD100240DDB /* DetailsViewController.swift in Sources */,
 			);
