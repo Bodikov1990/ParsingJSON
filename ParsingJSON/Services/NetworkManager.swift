@@ -30,6 +30,7 @@ class NetworkManager {
         AF.request(url)
             .validate()
             .responseJSON { dataResponse in
+
                 switch dataResponse.result {
                 case .success(let value):
                     let persons = Person.getPersons(from: value)
