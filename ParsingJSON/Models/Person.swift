@@ -19,9 +19,9 @@ struct Person: Decodable {
     
     var details: String {
         """
-        \(fullName)
-        \(email ?? "")
-        \(city ?? "")
+        Fullname:   \(fullName)
+        email:      \(email ?? "")
+        City:       \(city ?? "")
 
         """
     }
